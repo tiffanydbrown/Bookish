@@ -8,6 +8,7 @@ import {
   errorMiddleware,
 } from './lib/index.js';
 
+const userId = 1;
 const connectionString =
   process.env.DATABASE_URL ||
   `postgresql://${process.env.RDS_USERNAME}:${process.env.RDS_PASSWORD}@${process.env.RDS_HOSTNAME}:${process.env.RDS_PORT}/${process.env.RDS_DB_NAME}`;

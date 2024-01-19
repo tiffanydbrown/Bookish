@@ -9,3 +9,6 @@
 --      ('Learn to code', false),
 --      ('Build projects', false),
 --      ('Get a job', false);
+
+insert into "user" ("firstName", "lastName", "userName", "hashedPassword")
+values ('Tiffany', 'Brown', 'tdbrown', '');
