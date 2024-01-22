@@ -1,14 +1,12 @@
-import 'tailwindcss/tailwind.css';
+import { Logo } from './Logo';
 
 export function Header() {
   return (
-    <header className="p-8 flex flex-wrap justify-center flex-row bg-anti-flash-white">
-      <div>
-        <img src="client/src/assets/Bookish.png" alt="Bookish Logo" />
-      </div>
-      <div className="signIn text-cherry-red ">
+    <header className="p-3  bg-anti-flash-white">
+      <div className="signIn text-cherry-red flex flex-wrap justify-end flex-row  ">
         <a href="/sign">Sign Up / Sign In</a>
       </div>
+      <Logo />
     </header>
   );
 }
