@@ -9,9 +9,9 @@ export function NavBar() {
     setIsOpen(false);
   }
   return (
-    <nav className="flex flex-wrap flex-row  text-stone-100 font-serif text-[28px] bg-red-500">
+    <nav className="flex flex-wrap flex-row p-3   text-anti-flash-white  text-[24px] bg-cherry-red">
       <div>
-        <ul className="navLinks columns-4">
+        <ul className="navLinks columns-2 gap-1">
           <li>
             <a href="/">Home</a>
           </li>
