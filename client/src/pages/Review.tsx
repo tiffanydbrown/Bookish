@@ -1,8 +1,10 @@
+import { RatingComponent } from '../components/Rating';
+
 export function Review() {
   return (
     <div className="container">
       <div>
-        <img>some image</img>
+        <img src="some image" />
       </div>
       <div>
         <label>
@@ -29,6 +31,7 @@ export function Review() {
           />
         </a>
       </div>
+      <RatingComponent />
     </div>
   );
 }
