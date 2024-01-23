@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 
 export function NavBar() {
   return (
-    <nav className=" bg-cherry-red">
+    <nav className="bg-cherry-red">
       <div>
-        <ul className="flex flex-wrap p-2 text-anti-flash-white  text-[24px] navLinks gap-5  ">
+        <ul className="flex flex-wrap p-2 text-anti-flash-white text-[24px] navLinks gap-5">
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -12,8 +12,10 @@ export function NavBar() {
             <Link to="/about">About</Link>
           </li>
           <details className="dropdown">
-            <summary className="m-1 btn">Books</summary>
-            <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+            <summary className="btn bg-cherry-red text-anti-flash-white text-[24px]">
+              Books
+            </summary>
+            <ul className="p-2 shadow menu dropdown-content z-[1] text-cherry-red bg-base-100 rounded-box w-52">
               <li>
                 <Link to="/reviews">Reviews</Link>
               </li>

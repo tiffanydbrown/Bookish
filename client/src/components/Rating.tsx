@@ -1,6 +1,6 @@
 export function RatingComponent() {
   return (
-    <div className="rating">
+    <div className="rating p-5 flex flex-wrap flex-row justify-center">
       <input
         type="radio"
         name="rating-2"
