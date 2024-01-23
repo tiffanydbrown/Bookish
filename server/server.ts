@@ -57,14 +57,14 @@ app.get('/api/bookReview/:bookReviewId', async (req, res, next) => {
     `;
     const params = [reviewId];
     const result = await db.query(sql, params);
-    const review = result.rows[0];
-    if (!review) {
+    const bookReview = result.rows[0];
+    if (!bookReview) {
       throw new ClientError(
         404,
         `Cannot find review with "reviewId" ${reviewId}`
       );
     }
-    res.json(review);
+    res.json(bookReview);
   } catch (err) {
     next(err);
   }
@@ -72,24 +72,134 @@ app.get('/api/bookReview/:bookReviewId', async (req, res, next) => {
 
 app.post('/api/bookReview', async (req, res, next) => {
   try {
-    const { name, course, score } = req.body;
-    if (!name) throw new ClientError(400, 'User did not input name');
-    if (!course) throw new ClientError(400, 'User did not input course');
-    if (!score) throw new ClientError(400, 'User did not input score');
-    if (!Number.isInteger(score) || +score < 0 || score > 100) {
-      throw new ClientError(400, 'Score is not an integer between 0 and 100');
-    }
+    const {
+      bookTitle,
+      bookAuthor,
+      series,
+      publisher,
+      genres,
+      synopsis,
+      review,
+    } = req.body;
+    if (!bookTitle) throw new ClientError(400, 'User did not input title');
+    if (!bookAuthor) throw new ClientError(400, 'User did not input author');
+    if (!series) throw new ClientError(400, 'User did not input series');
+    if (!publisher) throw new ClientError(400, 'User did not input publisher');
+    if (!genres) throw new ClientError(400, 'User did not input genres');
+    if (!synopsis) throw new ClientError(400, 'User did not input synopsis');
+    if (!review) throw new ClientError(400, 'User did not input review');
 
     const sql = `
-      insert into "grades" ("course", "name", "score")
-        values($1, $2, $3)
+      insert into "bookReview" ("bookTitle", "bookAuthor", "series", "publisher", "genres", "synopsis", "review", "reviewAuthor")
+        values($1, $2, $3, $4, $5, $6, $7, $8)
       returning *;
     `;
 
-    const params = [course, name, +score];
+    const params = [
+      bookTitle,
+      bookAuthor,
+      series,
+      publisher,
+      genres,
+      synopsis,
+      review,
+      1,
+    ];
     const result = await db.query(sql, params);
-    const grade = result.rows[0];
-    res.json(grade);
+    const bookReview = result.rows[0];
+    res.json(bookReview);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.put('/api/bookReview:bookReviewId', async (req, res, next) => {
+  try {
+    const bookReviewId = Number(req.params.bookReviewId);
+    if (
+      !Number.isInteger(bookReviewId) ||
+      bookReviewId <= 0 ||
+      Number.isNaN(bookReviewId)
+    ) {
+      throw new ClientError(400, `"bookReviewId" must be a positive integer`);
+    }
+    const {
+      bookTitle,
+      bookAuthor,
+      series,
+      publisher,
+      genres,
+      synopsis,
+      review,
+    } = req.body;
+    if (!bookTitle) throw new ClientError(400, 'User did not input title');
+    if (!bookAuthor) throw new ClientError(400, 'User did not input author');
+    if (!series) throw new ClientError(400, 'User did not input series');
+    if (!publisher) throw new ClientError(400, 'User did not input publisher');
+    if (!genres) throw new ClientError(400, 'User did not input genres');
+    if (!synopsis) throw new ClientError(400, 'User did not input synopsis');
+    if (!review) throw new ClientError(400, 'User did not input review');
+
+    const sql = `
+      update "bookReview"
+        set "bookTitle" = $1,
+            "bookAuthor" = $2,
+            "series" = $3,
+            "publisher" = $4,
+            "genres" = $5,
+            "synopsis" = $6,
+            "review" = $7,
+            "reviewAuthor" = $8
+        where "bookReviewId = $9
+      returning *;
+    `;
+    const params = [
+      bookTitle,
+      bookAuthor,
+      series,
+      publisher,
+      genres,
+      synopsis,
+      review,
+      1,
+      bookReviewId,
+    ];
+    const result = await db.query(sql, params);
+    const bookReview = result.rows;
+    res.json(bookReview);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.delete('/api/bookReview/:bookReviewId', async (req, res, next) => {
+  try {
+    const bookReviewId = Number(req.params.bookReviewId);
+    if (
+      !Number.isInteger(bookReviewId) ||
+      bookReviewId <= 0 ||
+      Number.isNaN(bookReviewId)
+    ) {
+      throw new ClientError(400, `"bookReviewId" must be a positive integer`);
+    }
+
+    const sql = `
+      delete
+        from "bookReview"
+        where "bookReviewId" = $1
+      returning *;
+    `;
+
+    const params = [bookReviewId];
+    const result = await db.query(sql, params);
+    const bookReview = result.rows[0];
+    if (!bookReview) {
+      throw new ClientError(
+        404,
+        `Cannot find bookReview with "bookReviewId" ${bookReviewId}`
+      );
+    }
+    res.sendStatus(204);
   } catch (err) {
     next(err);
   }

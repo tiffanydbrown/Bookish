@@ -2,26 +2,33 @@ import { useState } from 'react';
 
 function getDate() {
   const today = new Date();
-  const month = today.getMonth() + 1;
-  const year = today.getFullYear();
-  const date = today.getDate();
-  return `${month}/${date}/${year}`;
+  return today.toLocaleDateString();
 }
 
 export function BookInfo() {
-  const [currentDate] = useState(getDate());
+  const [photoUrl, setPhotoUrl] = useState('');
 
   return (
     <div className="hero min-h-screen">
       <div className="hero-content flex-col lg:flex-row">
         <img
-          src="/src/images/lightbringer.png"
+          src={photoUrl || '/images/placeholder-image-square.jpg'}
           className="max-w-sm rounded-lg shadow-2xl"
         />
+        <label className="text-anti-flash-white">
+          Photo URL:{' '}
+          <input
+            type="text"
+            value={photoUrl}
+            onChange={(e) => setPhotoUrl(e.target.value)}
+            className="input input-ghost w-full max-w-xs"
+          />
+        </label>
+
         <div>
           <h1 className="text-5xl text-anti-flash-white font-bold">Review:</h1>
           <label className="text-anti-flash-white">
-            Date: <p className="date">{currentDate}</p>
+            Date: <p className="date">{getDate()}</p>
           </label>
           <br />
           <label className="text-anti-flash-white">
@@ -86,7 +93,7 @@ export function BookInfo() {
           </a>
           <textarea
             placeholder="Synopsis"
-            name="Synopsis"
+            name="synopsis"
             className="textarea resize textarea-bordered textarea-lg w-full max-w-xs"></textarea>
         </div>
       </div>

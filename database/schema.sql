@@ -10,7 +10,7 @@ CREATE TABLE "bookReview" (
   "bookReviewId" serial PRIMARY KEY,
   "bookTitle" text,
   "bookAuthor" text,
-  "date" date,
+  "date" date default now(),
   "series" text,
   "publisher" text,
   "genres" text,
