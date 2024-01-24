@@ -20,6 +20,7 @@ export function BookInfo() {
           <input
             type="text"
             value={photoUrl}
+            name="reviewImage"
             onChange={(e) => setPhotoUrl(e.target.value)}
             className="input input-ghost w-full max-w-xs"
           />

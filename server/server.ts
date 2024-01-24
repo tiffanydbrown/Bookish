@@ -80,6 +80,8 @@ app.post('/api/bookReview', async (req, res, next) => {
       genres,
       synopsis,
       review,
+      reviewImage,
+      rating,
     } = req.body;
     if (!bookTitle) throw new ClientError(400, 'User did not input title');
     if (!bookAuthor) throw new ClientError(400, 'User did not input author');
@@ -88,10 +90,12 @@ app.post('/api/bookReview', async (req, res, next) => {
     if (!genres) throw new ClientError(400, 'User did not input genres');
     if (!synopsis) throw new ClientError(400, 'User did not input synopsis');
     if (!review) throw new ClientError(400, 'User did not input review');
+    if (!reviewImage) throw new ClientError(400, 'User did not input image');
+    if (!rating) throw new ClientError(400, 'User did not input rating');
 
     const sql = `
-      insert into "bookReview" ("bookTitle", "bookAuthor", "series", "publisher", "genres", "synopsis", "review", "reviewAuthor")
-        values($1, $2, $3, $4, $5, $6, $7, $8)
+      insert into "bookReview" ("bookTitle", "bookAuthor", "series", "publisher", "genres", "synopsis", "review", "reviewImage", "rating", "reviewAuthor")
+        values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
       returning *;
     `;
 
@@ -103,6 +107,8 @@ app.post('/api/bookReview', async (req, res, next) => {
       genres,
       synopsis,
       review,
+      reviewImage,
+      rating,
       1,
     ];
     const result = await db.query(sql, params);
@@ -131,6 +137,8 @@ app.put('/api/bookReview:bookReviewId', async (req, res, next) => {
       genres,
       synopsis,
       review,
+      reviewImage,
+      rating,
     } = req.body;
     if (!bookTitle) throw new ClientError(400, 'User did not input title');
     if (!bookAuthor) throw new ClientError(400, 'User did not input author');
@@ -139,6 +147,8 @@ app.put('/api/bookReview:bookReviewId', async (req, res, next) => {
     if (!genres) throw new ClientError(400, 'User did not input genres');
     if (!synopsis) throw new ClientError(400, 'User did not input synopsis');
     if (!review) throw new ClientError(400, 'User did not input review');
+    if (!reviewImage) throw new ClientError(400, 'User did not input image');
+    if (!rating) throw new ClientError(400, 'User did not input rating');
 
     const sql = `
       update "bookReview"
@@ -149,8 +159,10 @@ app.put('/api/bookReview:bookReviewId', async (req, res, next) => {
             "genres" = $5,
             "synopsis" = $6,
             "review" = $7,
-            "reviewAuthor" = $8
-        where "bookReviewId = $9
+            "reviewImage" = $8,
+            "rating" = $9,
+            "reviewAuthor" = $10
+        where "bookReviewId = $11
       returning *;
     `;
     const params = [
@@ -161,6 +173,8 @@ app.put('/api/bookReview:bookReviewId', async (req, res, next) => {
       genres,
       synopsis,
       review,
+      reviewImage,
+      rating,
       1,
       bookReviewId,
     ];
