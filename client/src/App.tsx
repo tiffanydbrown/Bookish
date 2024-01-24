@@ -1,5 +1,5 @@
 import './App.css';
-
+import { Home } from './pages/Home';
 import { Header } from './components/Header';
 
 import { Review } from './pages/Review';
@@ -10,6 +10,7 @@ export default function App() {
     <div>
       <Routes>
         <Route path="/" element={<Header />}>
+          <Route index element={<Home />} />
           <Route path="reviews" element={<Review />} />
         </Route>
       </Routes>
