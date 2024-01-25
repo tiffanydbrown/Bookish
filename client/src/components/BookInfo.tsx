@@ -25,7 +25,6 @@ export function BookInfo() {
             className="input input-ghost w-full max-w-xs"
           />
         </label>
-
         <div>
           <h1 className="text-5xl text-anti-flash-white font-bold">Review:</h1>
           <label className="text-anti-flash-white">

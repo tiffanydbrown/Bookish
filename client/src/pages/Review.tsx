@@ -4,7 +4,7 @@ import { BookInfo } from '../components/BookInfo';
 import { RatingComponent } from '../components/Rating';
 import { FormEvent } from 'react';
 
-export function Review() {
+export function ReviewPage() {
   const navigate = useNavigate();
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
