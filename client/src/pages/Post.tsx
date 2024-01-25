@@ -3,6 +3,7 @@ import { PostInfo } from '../components/PostInfo';
 import { fetchReview, type Review } from '../data';
 import { useParams } from 'react-router-dom';
 import { PostReview } from '../components/PostReview';
+import { ReviewRating } from '../components/ReviewRating';
 
 export function Post() {
   const [post, setPost] = useState<Review>();
@@ -40,6 +41,8 @@ export function Post() {
     <div className="bg-space-cadet">
       <PostInfo review={post} />
       <PostReview bookReview={post} />
+      <br />
+      <ReviewRating review={post} />
     </div>
   );
 }
