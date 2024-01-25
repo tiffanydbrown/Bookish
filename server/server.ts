@@ -94,8 +94,8 @@ app.post('/api/bookReview', async (req, res, next) => {
     if (!rating) throw new ClientError(400, 'User did not input rating');
 
     const sql = `
-      insert into "bookReview" ("bookTitle", "bookAuthor", "series", "publisher", "genres", "synopsis", "review", "reviewImage", "rating")
-        values($1, $2, $3, $4, $5, $6, $7, $8, $9)
+      insert into "bookReview" ("bookTitle", "bookAuthor", "series", "publisher", "genres", "synopsis", "review", "reviewImage", "rating", "reviewAuthor")
+        values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
       returning *;
     `;
 
@@ -161,7 +161,8 @@ app.put('/api/bookReview:bookReviewId', async (req, res, next) => {
             "review" = $7,
             "reviewImage" = $8,
             "rating" = $9,
-        where "bookReviewId = $10
+            "reviewAuthor" = $10
+        where "bookReviewId = $11
       returning *;
     `;
     const params = [
