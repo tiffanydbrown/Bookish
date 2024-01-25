@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchHome, type Review } from '../data';
+import { Link } from 'react-router-dom';
 
 export function ReviewSnippet() {
   const [reviews, setReviews] = useState<Review[]>();
@@ -31,20 +32,17 @@ export function ReviewSnippet() {
     );
   return (
     <div className="container mx-auto">
-      <div className="hero min-h-40  bg-anti-flash-white rounded-3xl">
+      <div className="min-h-40  bg-anti-flash-white rounded-3xl">
         {reviews?.map((review) => (
           <div
             key={review.bookReviewId}
             className="hero-content flex-col lg:flex-row">
             <ReviewCard review={review} />
             <button className="btn bg-fire-engine-red text-anti-flash-white">
-              Read More
+              <Link to={`/post/${review.bookReviewId}`}>Read More</Link>
             </button>
           </div>
         ))}
-      </div>
-      <div className="flex flex-col w-full">
-        <div className="divider bg-fire-engine-red"></div>
       </div>
     </div>
   );

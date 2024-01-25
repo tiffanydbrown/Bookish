@@ -1,8 +1,8 @@
 import './App.css';
 import { Home } from './pages/Home';
 import { Header } from './components/Header';
-
-import { Review } from './pages/Review';
+import { ReviewPage } from './pages/Review';
+import { Post } from './pages/Post';
 import { Route, Routes } from 'react-router-dom';
 
 export default function App() {
@@ -11,7 +11,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Header />}>
           <Route index element={<Home />} />
-          <Route path="reviews" element={<Review />} />
+          <Route path="reviews" element={<ReviewPage />} />
+          <Route path="post/:id" element={<Post />} />
         </Route>
       </Routes>
     </div>
