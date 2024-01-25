@@ -27,6 +27,7 @@ export function ReviewPage() {
       //react routing navigate
       navigate('/');
     } catch (error) {
+      alert(error);
       console.error(error);
     }
   }

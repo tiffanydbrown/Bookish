@@ -16,8 +16,9 @@ CREATE TABLE "bookReview" (
   "genres" text,
   "synopsis" text,
   "review" text,
+  "reviewAuthor" int,
   "reviewImage" text,
-  "rating" smallint not null check (rating between 0 and 5)
+  "rating" smallint not null check (rating between 1 and 5)
 );
 
 CREATE TABLE "user" (
