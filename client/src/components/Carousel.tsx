@@ -1,6 +1,6 @@
 export function Carousel() {
   return (
-    <div className="carousel w-full">
+    <div className="carousel w-full pb-10">
       <div id="slide1" className="carousel-item relative w-full">
         <img
           src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg"

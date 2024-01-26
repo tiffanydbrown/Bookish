@@ -1,7 +1,7 @@
 export function Footer() {
   return (
     <div>
-      <footer className="footer p-10 bg-cherry-red text-neutral-content">
+      <footer className="footer p-10 bg-cherry-red text-anti-flash-white">
         <aside>
           <img
             width="100"
