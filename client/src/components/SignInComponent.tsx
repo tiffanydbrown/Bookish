@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { type FormEvent, useState } from 'react';
 
 export function SignInComponent() {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -20,7 +21,9 @@ export function SignInComponent() {
         throw new Error(`fetch Error ${res.status}`);
       }
       const { user, token } = await res.json();
+      localStorage.setItem('token', token);
       console.log('Signed In', user, '; received token:', token);
+      navigate('/');
     } catch (err) {
       alert(`Error signing in: ${err}`);
     } finally {

@@ -3,6 +3,7 @@ import { BkReview } from '../components/BkReview';
 import { BookInfo } from '../components/BookInfo';
 import { RatingComponent } from '../components/Rating';
 import { FormEvent } from 'react';
+import { fetchCreateReview, UnsavedReview } from '../data';
 
 export function ReviewPage() {
   const navigate = useNavigate();
@@ -15,16 +16,7 @@ export function ReviewPage() {
     // Make fetch call to database
 
     try {
-      const options = {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify(formJson),
-      };
-      const response = await fetch('/api/bookReview', options);
-      if (!response.ok) throw new Error(`Bad Response ${response.status}`);
-      //react routing navigate
+      await fetchCreateReview(formJson as unknown as UnsavedReview);
       navigate('/');
     } catch (error) {
       alert(error);
