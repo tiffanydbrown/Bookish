@@ -2,11 +2,17 @@
 import 'dotenv/config';
 import express from 'express';
 import pg from 'pg';
+import argon2 from 'argon2';
 import {
   ClientError,
   defaultMiddleware,
   errorMiddleware,
 } from './lib/index.js';
+
+type User = {
+  username: string;
+  password: string;
+};
 
 const userId = 1;
 const connectionString =
@@ -29,6 +35,26 @@ app.use(express.static(reactStaticDir));
 // Static directory for file uploads server/public/
 app.use(express.static(uploadsStaticDir));
 app.use(express.json());
+
+app.post('/api/auth/sign-up', async (req, res, next) => {
+  try {
+    const { username, password } = req.body as Partial<User>;
+    if (!username || !password) {
+      throw new ClientError(400, 'username and password are required fields');
+    }
+
+    const hashedPassword = await argon2.hash(password);
+    const sql = `insert into "user"("userName", "hashedPassword")
+    values ($1, $2)
+    returning "userId", "userName", "createdAt"`;
+    const params = [username, hashedPassword];
+    const result = await db.query<User>(sql, params);
+    const [user] = result.rows;
+    res.status(201).json(user);
+  } catch (err) {
+    next(err);
+  }
+});
 
 app.get('/api/bookReview', async (req, res, next) => {
   try {
