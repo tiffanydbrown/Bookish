@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Logo } from './Logo';
 import { NavBar } from './NavBar';
+import { Footer } from './Footer';
 
 export function Header() {
   return (
@@ -13,6 +14,7 @@ export function Header() {
         <NavBar />
       </header>
       <Outlet />
+      <Footer />
     </div>
   );
 }
