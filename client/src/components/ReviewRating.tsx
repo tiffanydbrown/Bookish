@@ -16,6 +16,8 @@ export function ReviewRating({ review }: RatingProps) {
     <div key={star} className="rating p-3 mask mask-star-2 bg-yellow-300"></div>
   ));
   return (
-    <div className="flex flex-wrap flex-row justify-center">{starRating}</div>
+    <div className="flex flex-wrap flex-row pb-10 justify-center">
+      {starRating}
+    </div>
   );
 }

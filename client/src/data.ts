@@ -27,3 +27,19 @@ export async function fetchReview(bookReviewId: number): Promise<Review> {
   if (!res.ok) throw new Error(`fetch Error ${res.status}`);
   return await res.json();
 }
+
+export async function fetchCreateReview(
+  bookReview: UnsavedReview
+): Promise<Review> {
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+    body: JSON.stringify(bookReview),
+  };
+  const response = await fetch('/api/bookReview', options);
+  if (!response.ok) throw new Error(`Bad Response ${response.status}`);
+  return response.json();
+}

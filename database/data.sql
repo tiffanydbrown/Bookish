@@ -10,5 +10,5 @@
 --      ('Build projects', false),
 --      ('Get a job', false);
 
-insert into "user" ("firstName", "lastName", "userName", "hashedPassword")
-values ('Tiffany', 'Brown', 'tdbrown', '');
+insert into "user" ("userName", "hashedPassword")
+values ('tdbrown', '');

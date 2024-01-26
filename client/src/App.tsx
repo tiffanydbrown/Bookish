@@ -4,6 +4,8 @@ import { Header } from './components/Header';
 import { ReviewPage } from './pages/Review';
 import { Post } from './pages/Post';
 import { Route, Routes } from 'react-router-dom';
+import { SignUp } from './pages/SignUp';
+import { SignIn } from './pages/SignIn';
 
 export default function App() {
   return (
@@ -13,6 +15,8 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="reviews" element={<ReviewPage />} />
           <Route path="post/:id" element={<Post />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="signin" element={<SignIn />} />
         </Route>
       </Routes>
     </div>

@@ -23,10 +23,10 @@ CREATE TABLE "bookReview" (
 
 CREATE TABLE "user" (
   "userId" serial PRIMARY KEY,
-  "firstName" text,
-  "lastName" text,
-  "userName" text,
-  "hashedPassword" text
+  "userName" text not null,
+  "hashedPassword" text not null,
+  "createdAt" timestamptz(6) not null default now(),
+  unique ("userName")
 );
 
 CREATE TABLE "booksTBR" (
