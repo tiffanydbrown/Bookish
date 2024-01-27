@@ -7,13 +7,13 @@ import { fetchCreateReview, UnsavedReview } from '../data';
 
 export function ReviewPage() {
   const navigate = useNavigate();
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const form = e.currentTarget;
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
-    // Make fetch call to database
 
     try {
       await fetchCreateReview(formJson as unknown as UnsavedReview);
@@ -23,10 +23,11 @@ export function ReviewPage() {
       console.error(error);
     }
   }
+
   return (
     <div className="bg-space-cadet">
       <form onSubmit={handleSubmit}>
-        <BookInfo />
+        <BookInfo onSubmit={() => undefined} review={Review} />
         <BkReview />
         <RatingComponent />
         <div className="save p-10">
