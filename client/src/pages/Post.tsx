@@ -11,8 +11,6 @@ export function Post() {
   const [error, setError] = useState<unknown>();
   const bookPost = useParams();
 
-  //make fetch as in ReviewSnippet
-  //API to single post
   useEffect(() => {
     async function loadReview() {
       try {
@@ -43,6 +41,10 @@ export function Post() {
       <PostReview bookReview={post} />
       <br />
       <ReviewRating review={post} />
+      <br />
+      <button className="btn bg-fire-engine-red text-anti-flash-white">
+        Edit
+      </button>
     </div>
   );
 }
