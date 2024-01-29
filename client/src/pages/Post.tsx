@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { PostInfo } from '../components/PostInfo';
 import { fetchReview, type Review } from '../data';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { PostReview } from '../components/PostReview';
 import { ReviewRating } from '../components/ReviewRating';
 
@@ -42,9 +42,11 @@ export function Post() {
       <br />
       <ReviewRating review={post} />
       <br />
-      <button className="btn bg-fire-engine-red text-anti-flash-white">
+      <Link
+        to={`/reviews/${bookPost.bookReviewId}`}
+        className="edit bg-fire-engine-red text-anti-flash-white">
         Edit
-      </button>
+      </Link>
     </div>
   );
 }

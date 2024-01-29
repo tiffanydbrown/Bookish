@@ -1,22 +1,47 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { BkReview } from '../components/BkReview';
 import { BookInfo } from '../components/BookInfo';
 import { RatingComponent } from '../components/Rating';
-import { FormEvent } from 'react';
+import { FormEvent, useState, useEffect } from 'react';
 import {
   fetchCreateReview,
   UnsavedReview,
+  fetchReview,
   fetchUpdateReview,
   Review,
 } from '../data';
 
-type Props = {
-  review?: Review;
-  onSubmit: () => void;
-};
-
-export function ReviewPage({ review, onSubmit }: Props) {
+export function ReviewPage() {
   const navigate = useNavigate();
+  const bookEdit = useParams();
+  const [post, setPost] = useState<Review>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<unknown>();
+
+  useEffect(() => {
+    async function loadReview() {
+      try {
+        if (!bookEdit.id) throw new Error('No id');
+        const post = await fetchReview(+bookEdit.id);
+        setPost(post);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    setIsLoading(true);
+    loadReview();
+  }, []);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error || !post)
+    return (
+      <div>
+        Error Loading Review:{' '}
+        {error instanceof Error ? error.message : 'Unknown Error'}
+      </div>
+    );
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -26,8 +51,8 @@ export function ReviewPage({ review, onSubmit }: Props) {
     const formJson = Object.fromEntries(formData.entries());
 
     try {
-      if (review) {
-        await fetchUpdateReview({ ...review });
+      if (bookEdit) {
+        await fetchUpdateReview(formJson as unknown as Review);
       } else {
         await fetchCreateReview(formJson as unknown as UnsavedReview);
       }
@@ -36,23 +61,14 @@ export function ReviewPage({ review, onSubmit }: Props) {
       alert(error);
       console.error(error);
     }
-    onSubmit();
   }
 
   return (
     <div className="bg-space-cadet">
       <form onSubmit={handleSubmit}>
         <BookInfo />
-        <BkReview
-          onSubmit={function (): void {
-            throw new Error('Function not implemented.');
-          }}
-        />
-        <RatingComponent
-          onSubmit={function (): void {
-            throw new Error('Function not implemented.');
-          }}
-        />
+        <BkReview />
+        <RatingComponent />
         <div className="save p-10">
           <button className="btn bg-fire-engine-red text-anti-flash-white">
             Save

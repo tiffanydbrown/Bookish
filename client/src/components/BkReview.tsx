@@ -2,7 +2,6 @@ import { Review } from '../data';
 
 type Props = {
   review?: Review;
-  onSubmit: () => void;
 };
 
 export function BkReview({ review }: Props) {
