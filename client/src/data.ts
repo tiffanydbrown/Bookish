@@ -48,7 +48,7 @@ export async function fetchUpdateReview(bookReview: Review): Promise<Review> {
   const req = {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application.json',
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
     body: JSON.stringify(bookReview),

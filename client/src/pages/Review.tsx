@@ -51,7 +51,7 @@ export function ReviewPage() {
     const formJson = Object.fromEntries(formData.entries());
 
     try {
-      if (bookEdit) {
+      if (bookEdit.id) {
         await fetchUpdateReview(formJson as unknown as Review);
       } else {
         await fetchCreateReview(formJson as unknown as UnsavedReview);
@@ -66,9 +66,10 @@ export function ReviewPage() {
   return (
     <div className="bg-space-cadet">
       <form onSubmit={handleSubmit}>
-        <BookInfo />
-        <BkReview />
-        <RatingComponent />
+        <input type="hidden" name="bookReviewId" value={bookEdit.id} />
+        <BookInfo review={post} />
+        <BkReview review={post} />
+        <RatingComponent review={post} />
         <div className="save p-10">
           <button className="btn bg-fire-engine-red text-anti-flash-white">
             Save
