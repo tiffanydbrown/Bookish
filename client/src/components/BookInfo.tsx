@@ -1,12 +1,17 @@
 import { useState } from 'react';
+import { Review } from '../data';
 
 function getDate() {
   const today = new Date();
   return today.toLocaleDateString();
 }
 
-export function BookInfo() {
-  const [photoUrl, setPhotoUrl] = useState('');
+type Props = {
+  review?: Review;
+};
+
+export function BookInfo({ review }: Props) {
+  const [photoUrl, setPhotoUrl] = useState(review?.reviewImage ?? '');
 
   return (
     <div className="hero min-h-screen">
@@ -37,6 +42,7 @@ export function BookInfo() {
               type="text"
               placeholder="Type here"
               name="bookTitle"
+              defaultValue={review?.bookTitle}
               className="input input-ghost w-full max-w-xs"
             />
           </label>
@@ -47,6 +53,7 @@ export function BookInfo() {
               type="text"
               placeholder="Type here"
               name="bookAuthor"
+              defaultValue={review?.bookAuthor}
               className="input input-ghost w-full max-w-xs"
             />
           </label>
@@ -57,6 +64,7 @@ export function BookInfo() {
               type="text"
               placeholder="Type here"
               name="series"
+              defaultValue={review?.series}
               className="input input-ghost w-full max-w-xs"
             />
           </label>
@@ -67,6 +75,7 @@ export function BookInfo() {
               type="text"
               placeholder="Type here"
               name="publisher"
+              defaultValue={review?.publisher}
               className="input input-ghost w-full max-w-md"
             />
           </label>
@@ -77,6 +86,7 @@ export function BookInfo() {
               type="text"
               placeholder="Type here"
               name="genres"
+              defaultValue={review?.genres}
               className="input input-ghost w-full max-w-xs"
             />
           </label>
@@ -94,6 +104,7 @@ export function BookInfo() {
           <textarea
             placeholder="Synopsis"
             name="synopsis"
+            defaultValue={review?.synopsis}
             className="textarea resize textarea-bordered textarea-lg w-full max-w-xs"></textarea>
         </div>
       </div>

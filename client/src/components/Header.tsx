@@ -7,10 +7,10 @@ export function Header() {
   return (
     <div>
       <header className="p-3  bg-anti-flash-white">
-        <div className="signup text-cherry-red flex flex-wrap justify-end flex-row  ">
+        <div className="signup text-cherry-red underline decoration-solid flex flex-wrap justify-end flex-row  ">
           <Link to="/signup">Sign Up</Link>
         </div>
-        <div className="signup text-cherry-red flex flex-wrap justify-end flex-row  ">
+        <div className="signup text-cherry-red underline decoration-solid flex flex-wrap justify-end flex-row  ">
           <Link to="/signin">Sign In</Link>
         </div>
         <Logo />

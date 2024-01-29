@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { PostInfo } from '../components/PostInfo';
 import { fetchReview, type Review } from '../data';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { PostReview } from '../components/PostReview';
 import { ReviewRating } from '../components/ReviewRating';
 
@@ -11,8 +11,6 @@ export function Post() {
   const [error, setError] = useState<unknown>();
   const bookPost = useParams();
 
-  //make fetch as in ReviewSnippet
-  //API to single post
   useEffect(() => {
     async function loadReview() {
       try {
@@ -43,6 +41,12 @@ export function Post() {
       <PostReview bookReview={post} />
       <br />
       <ReviewRating review={post} />
+      <br />
+      <Link
+        to={`/reviews/${bookPost.id}`}
+        className="edit flex flex-wrap justify-center pb-6 text-2xl underline text-fire-engine-red">
+        Edit
+      </Link>
     </div>
   );
 }
