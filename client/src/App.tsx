@@ -19,7 +19,7 @@ export default function App() {
           <Route path="signup" element={<SignUp />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="about" element={<About />} />
-          <Route path="reviews/:reviewId" element={<ReviewPage />} />
+          <Route path="reviews/:id" element={<ReviewPage />} />
         </Route>
       </Routes>
     </div>

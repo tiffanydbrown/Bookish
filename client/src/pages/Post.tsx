@@ -43,8 +43,8 @@ export function Post() {
       <ReviewRating review={post} />
       <br />
       <Link
-        to={`/reviews/${bookPost.bookReviewId}`}
-        className="edit bg-fire-engine-red text-anti-flash-white">
+        to={`/reviews/${bookPost.id}`}
+        className="edit flex flex-wrap justify-center pb-6 text-2xl underline text-fire-engine-red">
         Edit
       </Link>
     </div>
