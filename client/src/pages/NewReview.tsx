@@ -11,11 +11,11 @@ import {
   Review,
 } from '../data';
 
-export function ReviewPage() {
+export function NewReviewPage() {
   const navigate = useNavigate();
   const bookEdit = useParams();
   const [post, setPost] = useState<Review>();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<unknown>();
 
   useEffect(() => {
@@ -30,12 +30,13 @@ export function ReviewPage() {
         setIsLoading(false);
       }
     }
+    if (!bookEdit.id) return;
     setIsLoading(true);
     loadReview();
   }, []);
 
   if (isLoading) return <div>Loading...</div>;
-  if (error || !post)
+  if (error)
     return (
       <div>
         Error Loading Review:{' '}
