@@ -231,7 +231,7 @@ app.put(
             "reviewImage" = $8,
             "rating" = $9,
             "reviewAuthor" = $10
-        where "bookReviewId = $11
+        where "bookReviewId" = $11
       returning *;
     `;
       const params = [
