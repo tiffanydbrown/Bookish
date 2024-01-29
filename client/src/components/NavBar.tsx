@@ -17,6 +17,9 @@ export function NavBar() {
             </summary>
             <ul className="p-2 shadow menu dropdown-content z-[1] text-cherry-red bg-base-100 rounded-box w-52">
               <li>
+                <Link to="/newReviews">Create a Review</Link>
+              </li>
+              <li>
                 <Link to="/reviews">Reviews</Link>
               </li>
               <li>
