@@ -57,3 +57,15 @@ export async function fetchUpdateReview(bookReview: Review): Promise<Review> {
   if (!res.ok) throw new Error(`fetch Error ${res.status}`);
   return await res.json();
 }
+
+export async function fetchDeleteReview(bookReviewId: number): Promise<void> {
+  const req = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  };
+  const res = await fetch(`/api/bookReview/${bookReviewId}`, req);
+  if (!res.ok) throw new Error(`fetch Error ${res.status}`);
+}
