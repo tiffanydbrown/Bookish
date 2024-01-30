@@ -59,7 +59,7 @@ export function NewReviewPage() {
       }
       navigate('/');
     } catch (error) {
-      alert(error);
+      alert(`Error saving changes: ${error}`);
       console.error(error);
     }
   }
