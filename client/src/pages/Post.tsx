@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { PostInfo } from '../components/PostInfo';
 import { fetchDeleteReview, fetchReview, type Review } from '../data';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -11,6 +11,7 @@ export function Post() {
   const [error, setError] = useState<unknown>();
   const bookPost = useParams();
   const navigate = useNavigate();
+  const modalRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     async function loadReview() {
@@ -64,16 +65,10 @@ export function Post() {
           <button
             disabled={isLoading}
             className="btn btn-ghost text-2xl"
-            onClick={() =>
-              (
-                document.getElementById('my_modal_5') as HTMLDialogElement
-              )?.showModal()
-            }>
+            onClick={() => modalRef.current?.showModal()}>
             Delete Review
           </button>
-          <dialog
-            id="my_modal_5"
-            className="modal modal-bottom sm:modal-middle">
+          <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
             <div className="modal-box bg-anti-flash-white">
               <p className="py-4">Are You Sure You Want to Delete?</p>
               <div className="modal-action flex flex-wrap">
