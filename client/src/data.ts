@@ -22,6 +22,18 @@ export async function fetchHome(): Promise<Review[]> {
   return await res.json();
 }
 
+export async function fetchAuthorReview(): Promise<Review[]> {
+  const options = {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  };
+  const res = await fetch(`/api/reviewAuthor/bookReview`, options);
+  if (!res.ok) throw new Error(`fetch Error ${res.status}`);
+  return await res.json();
+}
+
 export async function fetchReview(bookReviewId: number): Promise<Review> {
   const res = await fetch(`/api/bookReview/${bookReviewId}`);
   if (!res.ok) throw new Error(`fetch Error ${res.status}`);

@@ -22,7 +22,6 @@ type Auth = {
   password: string;
 };
 
-const userId = 1;
 const connectionString =
   process.env.DATABASE_URL ||
   `postgresql://${process.env.RDS_USERNAME}:${process.env.RDS_PASSWORD}@${process.env.RDS_HOSTNAME}:${process.env.RDS_PORT}/${process.env.RDS_DB_NAME}`;
@@ -100,6 +99,8 @@ app.get('/api/bookReview', async (req, res, next) => {
     const sql = `
       select *
         from "bookReview"
+        order by "date" desc
+        limit 5
     `;
     const result = await db.query(sql);
     const bookReview = result.rows;
@@ -108,6 +109,28 @@ app.get('/api/bookReview', async (req, res, next) => {
     next(err);
   }
 });
+
+app.get(
+  '/api/reviewAuthor/bookReview',
+  authMiddleware,
+  async (req, res, next) => {
+    try {
+      const sql = `
+      select *
+        from "bookReview"
+        where "reviewAuthor" = $1
+        order by "date" desc
+    `;
+
+      const params = [req.user?.userId];
+      const result = await db.query(sql, params);
+      const bookReview = result.rows;
+      res.json(bookReview);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 
 app.get('/api/bookReview/:bookReviewId', async (req, res, next) => {
   try {
