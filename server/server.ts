@@ -22,7 +22,6 @@ type Auth = {
   password: string;
 };
 
-const userId = 1;
 const connectionString =
   process.env.DATABASE_URL ||
   `postgresql://${process.env.RDS_USERNAME}:${process.env.RDS_PASSWORD}@${process.env.RDS_HOSTNAME}:${process.env.RDS_PORT}/${process.env.RDS_DB_NAME}`;
@@ -100,6 +99,8 @@ app.get('/api/bookReview', async (req, res, next) => {
     const sql = `
       select *
         from "bookReview"
+        order by "date" desc
+        limit 5
     `;
     const result = await db.query(sql);
     const bookReview = result.rows;
@@ -108,6 +109,28 @@ app.get('/api/bookReview', async (req, res, next) => {
     next(err);
   }
 });
+
+app.get(
+  '/api/reviewAuthor/bookReview',
+  authMiddleware,
+  async (req, res, next) => {
+    try {
+      const sql = `
+      select *
+        from "bookReview"
+        where "reviewAuthor" = $1
+        order by "date" desc
+    `;
+
+      const params = [req.user?.userId];
+      const result = await db.query(sql, params);
+      const bookReview = result.rows;
+      res.json(bookReview);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 
 app.get('/api/bookReview/:bookReviewId', async (req, res, next) => {
   try {
@@ -174,7 +197,7 @@ app.post('/api/bookReview', authMiddleware, async (req, res, next) => {
       review,
       reviewImage,
       rating,
-      1,
+      req.user?.userId,
     ];
     const result = await db.query(sql, params);
     const bookReview = result.rows[0];
@@ -244,7 +267,7 @@ app.put(
         review,
         reviewImage,
         rating,
-        1,
+        req.user?.userId,
         bookReviewId,
       ];
       const result = await db.query(sql, params);
@@ -273,11 +296,11 @@ app.delete(
       const sql = `
       delete
         from "bookReview"
-        where "bookReviewId" = $1
+        where "bookReviewId" = $1 and "reviewAuthor" = $2
       returning *;
     `;
 
-      const params = [bookReviewId];
+      const params = [bookReviewId, req.user?.userId];
       const result = await db.query(sql, params);
       const bookReview = result.rows[0];
       if (!bookReview) {

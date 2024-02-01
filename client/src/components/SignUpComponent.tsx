@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { type FormEvent, useState } from 'react';
 
 export function SignUpComponent() {
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -20,6 +21,7 @@ export function SignUpComponent() {
         throw new Error(`fetch Error ${res.status}`);
       }
       const user = await res.json();
+      navigate('/signin');
       console.log('Registered', user);
     } catch (err) {
       alert(`Error registering user: ${err}`);
