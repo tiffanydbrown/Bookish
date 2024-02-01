@@ -23,6 +23,9 @@ export function NavBar() {
                 <Link to="/reviews">Reviews</Link>
               </li>
               <li>
+                <Link to="/newTbr">Add to TBR</Link>
+              </li>
+              <li>
                 <Link to="/tbr">TBR</Link>
               </li>
             </ul>
