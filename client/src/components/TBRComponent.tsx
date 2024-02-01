@@ -55,7 +55,9 @@ export function TBRComponent({ tbr }: Props) {
               type="text"
               placeholder="Type here"
               name="releaseDate"
-              defaultValue={tbr?.releaseDate}
+              defaultValue={
+                tbr?.releaseDate ? tbr.releaseDate.toString() : undefined
+              }
               className="input input-ghost w-full max-w-xs border-cherry-red"
             />
           </label>
