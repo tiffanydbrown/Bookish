@@ -47,6 +47,7 @@ export function NewTBRPage() {
       if (TBREdit.id) {
         await fetchUpdateTBR(formJson as unknown as TBR);
       } else {
+        console.log(formJson);
         await fetchCreateTBR(formJson as unknown as TBR);
       }
       navigate('/');

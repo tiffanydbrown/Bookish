@@ -209,18 +209,26 @@ app.post('/api/bookReview', authMiddleware, async (req, res, next) => {
 
 app.post('/api/booksTBR', authMiddleware, async (req, res, next) => {
   try {
-    const { bookTitleTBR, bookAuthorTBR, TBRImage } = req.body;
+    const { bookTitleTBR, bookAuthorTBR, TBRImage, releaseDate } = req.body;
     if (!bookTitleTBR) throw new ClientError(400, 'User did not input title');
     if (!bookAuthorTBR) throw new ClientError(400, 'User did not input author');
     if (!TBRImage) throw new ClientError(400, 'User did not input image');
+    if (!releaseDate)
+      throw new ClientError(400, 'User did not input release date');
 
     const sql = `
-      insert into "booksTBR" ("bookTitleTBR", "bookAuthorTBR", "TBRImage")
-        values($1, $2, $3)
+      insert into "booksTBR" ("bookTitleTBR", "bookAuthorTBR", "TBRImage", "releaseDate", "userID")
+        values($1, $2, $3, $4, $5)
       returning *;
     `;
 
-    const params = [bookTitleTBR, bookAuthorTBR, TBRImage, req.user?.userId];
+    const params = [
+      bookTitleTBR,
+      bookAuthorTBR,
+      TBRImage,
+      releaseDate,
+      req.user?.userId,
+    ];
     const result = await db.query(sql, params);
     const booksTBR = result.rows[0];
     res.json(booksTBR);
@@ -311,23 +319,27 @@ app.put('/api/booksTBR/:booksTBRId', authMiddleware, async (req, res, next) => {
     ) {
       throw new ClientError(400, `"booksTBRId" must be a positive integer`);
     }
-    const { bookTitleTBR, bookAuthorTBR, TBRImage } = req.body;
+    const { bookTitleTBR, bookAuthorTBR, TBRImage, releaseDate } = req.body;
     if (!bookTitleTBR) throw new ClientError(400, 'User did not input title');
     if (!bookAuthorTBR) throw new ClientError(400, 'User did not input author');
     if (!TBRImage) throw new ClientError(400, 'User did not input image');
+    if (!releaseDate)
+      throw new ClientError(400, 'User did not input release date');
 
     const sql = `
       update "booksTBR"
         set "bookTitleTBR" = $1,
             "bookAuthorTBR" = $2,
-            "TBRImage" = $3
-        where "booksTBRId" = $4
+            "TBRImage" = $3,
+            "releaseDate" = $4
+        where "booksTBRId" = $5
       returning *;
     `;
     const params = [
       bookTitleTBR,
       bookAuthorTBR,
       TBRImage,
+      releaseDate,
       req.user?.userId,
       booksTBRId,
     ];

@@ -23,7 +23,7 @@ export function TBRComponent({ tbr }: Props) {
           <input
             type="text"
             value={photoUrl}
-            name="tbrImage"
+            name="TBRImage"
             onChange={(e) => setPhotoUrl(e.target.value)}
             className="input input-ghost w-full max-w-xs border-cherry-red"
           />

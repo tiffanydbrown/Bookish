@@ -20,7 +20,7 @@ export type TBR = {
   booksTBRId: number;
   bookTitleTBR: string;
   bookAuthorTBR: string;
-  releaseDate: number;
+  releaseDate: Date;
   TBRImage: string;
 };
 
