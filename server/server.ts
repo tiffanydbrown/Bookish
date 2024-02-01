@@ -197,7 +197,7 @@ app.post('/api/bookReview', authMiddleware, async (req, res, next) => {
       review,
       reviewImage,
       rating,
-      1,
+      req.user?.userId,
     ];
     const result = await db.query(sql, params);
     const bookReview = result.rows[0];
@@ -267,7 +267,7 @@ app.put(
         review,
         reviewImage,
         rating,
-        1,
+        req.user?.userId,
         bookReviewId,
       ];
       const result = await db.query(sql, params);
@@ -296,11 +296,11 @@ app.delete(
       const sql = `
       delete
         from "bookReview"
-        where "bookReviewId" = $1
+        where "bookReviewId" = $1 and "reviewAuthor" = $2
       returning *;
     `;
 
-      const params = [bookReviewId];
+      const params = [bookReviewId, req.user?.userId];
       const result = await db.query(sql, params);
       const bookReview = result.rows[0];
       if (!bookReview) {

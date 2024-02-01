@@ -9,6 +9,3 @@
 --      ('Learn to code', false),
 --      ('Build projects', false),
 --      ('Get a job', false);
-
-insert into "user" ("userName", "hashedPassword")
-values ('tdbrown', '');
