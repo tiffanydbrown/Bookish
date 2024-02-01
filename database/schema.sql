@@ -33,11 +33,7 @@ CREATE TABLE "booksTBR" (
   "booksTBRId" serial PRIMARY KEY,
   "bookTitleTBR" text,
   "bookAuthorTBR" text,
-  "series" text,
-  "publisher" text,
-  "genres" text,
   "releaseDate" integer,
-  "synopsis" text,
   "userID" integer
 );
 

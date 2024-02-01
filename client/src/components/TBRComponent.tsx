@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { Review } from '../data';
+import { TBR } from '../data';
 
 type Props = {
-  review?: Review;
+  tbr?: TBR;
 };
 
-export function TBRComponent({ review }: Props) {
-  const [photoUrl, setPhotoUrl] = useState(review?.reviewImage ?? '');
+export function TBRComponent({ tbr }: Props) {
+  const [photoUrl, setPhotoUrl] = useState(tbr?.TBRImage ?? '');
 
   return (
     <div className="tbr flex flex-wrap m-8">
@@ -34,8 +34,8 @@ export function TBRComponent({ review }: Props) {
             <input
               type="text"
               placeholder="Type here"
-              name="bookTitle"
-              defaultValue={review?.bookTitle}
+              name="bookTitleTBR"
+              defaultValue={tbr?.bookTitleTBR}
               className="input input-ghost w-full max-w-xs border-cherry-red"
             />
           </label>
@@ -44,8 +44,18 @@ export function TBRComponent({ review }: Props) {
             <input
               type="text"
               placeholder="Type here"
-              name="bookAuthor"
-              defaultValue={review?.bookAuthor}
+              name="bookAuthorTBR"
+              defaultValue={tbr?.bookAuthorTBR}
+              className="input input-ghost w-full max-w-xs border-cherry-red"
+            />
+          </label>
+          <label className="text-cherry-red">
+            Release Date:{' '}
+            <input
+              type="text"
+              placeholder="Type here"
+              name="releaseDate"
+              defaultValue={tbr?.releaseDate}
               className="input input-ghost w-full max-w-xs border-cherry-red"
             />
           </label>

@@ -207,6 +207,28 @@ app.post('/api/bookReview', authMiddleware, async (req, res, next) => {
   }
 });
 
+app.post('/api/booksTBR', authMiddleware, async (req, res, next) => {
+  try {
+    const { bookTitleTBR, bookAuthorTBR, TBRImage } = req.body;
+    if (!bookTitleTBR) throw new ClientError(400, 'User did not input title');
+    if (!bookAuthorTBR) throw new ClientError(400, 'User did not input author');
+    if (!TBRImage) throw new ClientError(400, 'User did not input image');
+
+    const sql = `
+      insert into "booksTBR" ("bookTitleTBR", "bookAuthorTBR", "TBRImage")
+        values($1, $2, $3)
+      returning *;
+    `;
+
+    const params = [bookTitleTBR, bookAuthorTBR, TBRImage, req.user?.userId];
+    const result = await db.query(sql, params);
+    const booksTBR = result.rows[0];
+    res.json(booksTBR);
+  } catch (err) {
+    next(err);
+  }
+});
+
 app.put(
   '/api/bookReview/:bookReviewId',
   authMiddleware,
@@ -279,6 +301,44 @@ app.put(
   }
 );
 
+app.put('/api/booksTBR/:booksTBRId', authMiddleware, async (req, res, next) => {
+  try {
+    const booksTBRId = Number(req.params.booksTBRId);
+    if (
+      !Number.isInteger(booksTBRId) ||
+      booksTBRId <= 0 ||
+      Number.isNaN(booksTBRId)
+    ) {
+      throw new ClientError(400, `"booksTBRId" must be a positive integer`);
+    }
+    const { bookTitleTBR, bookAuthorTBR, TBRImage } = req.body;
+    if (!bookTitleTBR) throw new ClientError(400, 'User did not input title');
+    if (!bookAuthorTBR) throw new ClientError(400, 'User did not input author');
+    if (!TBRImage) throw new ClientError(400, 'User did not input image');
+
+    const sql = `
+      update "booksTBR"
+        set "bookTitleTBR" = $1,
+            "bookAuthorTBR" = $2,
+            "TBRImage" = $3
+        where "booksTBRId" = $4
+      returning *;
+    `;
+    const params = [
+      bookTitleTBR,
+      bookAuthorTBR,
+      TBRImage,
+      req.user?.userId,
+      booksTBRId,
+    ];
+    const result = await db.query(sql, params);
+    const bookTBR = result.rows;
+    res.json(bookTBR);
+  } catch (err) {
+    next(err);
+  }
+});
+
 app.delete(
   '/api/bookReview/:bookReviewId',
   authMiddleware,
@@ -307,6 +367,43 @@ app.delete(
         throw new ClientError(
           404,
           `Cannot find bookReview with "bookReviewId" ${bookReviewId}`
+        );
+      }
+      res.sendStatus(204);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+app.delete(
+  '/api/booksTBR/:booksTBRId',
+  authMiddleware,
+  async (req, res, next) => {
+    try {
+      const booksTBRId = Number(req.params.booksTBRId);
+      if (
+        !Number.isInteger(booksTBRId) ||
+        booksTBRId <= 0 ||
+        Number.isNaN(booksTBRId)
+      ) {
+        throw new ClientError(400, `"bookReviewId" must be a positive integer`);
+      }
+
+      const sql = `
+      delete
+        from "booksTBR"
+        where "booksTBRId" = $1
+      returning *;
+    `;
+
+      const params = [booksTBRId, req.user?.userId];
+      const result = await db.query(sql, params);
+      const bookTBR = result.rows[0];
+      if (!bookTBR) {
+        throw new ClientError(
+          404,
+          `Cannot find bookReview with "bookReviewId" ${booksTBRId}`
         );
       }
       res.sendStatus(204);
