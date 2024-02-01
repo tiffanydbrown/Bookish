@@ -8,6 +8,8 @@ import { Route, Routes } from 'react-router-dom';
 import { SignUp } from './pages/SignUp';
 import { SignIn } from './pages/SignIn';
 import { About } from './pages/About';
+import { TBRPage } from './pages/TBR';
+import { NewTBRPage } from './pages/NewTBR';
 
 export default function App() {
   return (
@@ -22,6 +24,8 @@ export default function App() {
           <Route path="signin" element={<SignIn />} />
           <Route path="about" element={<About />} />
           <Route path="reviews/:id" element={<NewReviewPage />} />
+          <Route path="tbr" element={<TBRPage />} />
+          <Route path="newTbr" element={<NewTBRPage />} />
         </Route>
       </Routes>
     </div>
