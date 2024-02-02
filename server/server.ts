@@ -132,6 +132,24 @@ app.get(
   }
 );
 
+app.get('/api/userID/booksTBR', authMiddleware, async (req, res, next) => {
+  try {
+    const sql = `
+      select *
+        from "booksTBR"
+        where "userID" = $1
+        order by "releaseDate" desc
+    `;
+
+    const params = [req.user?.userId];
+    const result = await db.query(sql, params);
+    const TBRPost = result.rows;
+    res.json(TBRPost);
+  } catch (err) {
+    next(err);
+  }
+});
+
 app.get('/api/bookReview/:bookReviewId', async (req, res, next) => {
   try {
     const reviewId = Number(req.params.bookReviewId);
