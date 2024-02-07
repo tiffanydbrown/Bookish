@@ -6,7 +6,7 @@ A web application for book lovers who want to write and read reviews of their fa
 
 - Users can `post`, `edit`, and `delete` a review of a book.
 - Users can provide a `rating` for a book they are reviewing.
-- Users can `post`, `edit`, and `delete` a book they want to read to their `To Be Read (TBR) list`.
+- Users can `post` a book they want to read to their `To Be Read (TBR) list`.
 - Users can `view` the reviews of other users.
 - Users can `create an account` to use the application, and can `securely sign in` to the site.
 
