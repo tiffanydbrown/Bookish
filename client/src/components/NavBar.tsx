@@ -12,7 +12,7 @@ export function NavBar() {
             <Link to="/about">About</Link>
           </li>
           <details className="dropdown">
-            <summary className="btn bg-cherry-red text-anti-flash-white text-[24px]">
+            <summary className=" bg-cherry-red text-anti-flash-white text-[24px]">
               Books
             </summary>
             <ul className="p-2 shadow menu dropdown-content z-[1] text-cherry-red bg-base-100 rounded-box w-52">
@@ -30,6 +30,9 @@ export function NavBar() {
               </li>
             </ul>
           </details>
+          <li>
+            <Link to="/signin">Sign In</Link>
+          </li>
         </ul>
       </div>
     </nav>
