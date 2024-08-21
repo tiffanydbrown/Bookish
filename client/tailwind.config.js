@@ -9,7 +9,7 @@ export default {
         'cool-gray': '#8D99AE',
         'cherry-red': '#EF233C',
         'fire-engine-red': '#D90429',
-        'space-cadet': '#2B2D42',
+        blue: '#0007c1',
       },
       fontFamily: {
         sans: ['Lato', 'sans-serif'],
