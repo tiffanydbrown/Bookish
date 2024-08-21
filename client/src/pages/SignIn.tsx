@@ -2,7 +2,7 @@ import { SignInComponent } from '../components/SignInComponent';
 
 export function SignIn() {
   return (
-    <div className="flex bg-space-cadet justify-center">
+    <div className="flex bg-dark-lilac justify-center">
       <SignInComponent />
     </div>
   );

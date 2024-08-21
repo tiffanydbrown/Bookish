@@ -6,10 +6,8 @@ export default {
     extend: {
       colors: {
         'anti-flash-white': '#EDF2F4',
-        'cool-gray': '#8D99AE',
-        'cherry-red': '#EF233C',
-        'fire-engine-red': '#D90429',
-        'space-cadet': '#2B2D42',
+        lilac: '#b0b0f9',
+        'dark-lilac': '#8384f5',
       },
       fontFamily: {
         sans: ['Lato', 'sans-serif'],

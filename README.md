@@ -1,6 +1,6 @@
 # :open_book: [Bookish](http://eb-bookish-dev.us-west-2.elasticbeanstalk.com/) :construction: Site Under Construction :construction:
 
-A web application for book lovers who want to write and read reviews of their favorite books and keep track of the books they would like to read. 
+A web application for book lovers who want to write and read reviews of their favorite books and keep track of the books they would like to read.
 
 ## :memo: How to Use the Site
 
@@ -12,8 +12,8 @@ A web application for book lovers who want to write and read reviews of their fa
 
 ![ScreenRecording2024-02-07at12 10 02PM-ezgif com-video-to-gif-converter](https://github.com/tiffanydbrown/Bookish/assets/139157669/06225981-3420-4b2c-bc2a-cf784177d676)
 
-
 ## :floppy_disk: Install
+
 npm install bookish --save
 
 ## :computer: Technologies Used
@@ -26,4 +26,3 @@ npm install bookish --save
 - React
 - NodeJS
 - Express
-

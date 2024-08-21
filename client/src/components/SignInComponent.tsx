@@ -33,40 +33,40 @@ export function SignInComponent() {
 
   return (
     <div className="flex flex-col p-10">
-      <h3 className="font-bold text-3xl text-fire-engine-red p-8">
+      <h3 className="font-bold text-3xl text-black p-8">
         Sign In To Your Account
       </h3>
       <form onSubmit={handleSubmit}>
-        <label className="text-anti-flash-white font-bold">
+        <label className="text-black font-bold">
           user name:{' '}
           <input
             required
             name="username"
             type="text"
-            className="form-input px-4 py-3 mb-4 rounded-full text-space-cadet"></input>
+            className="form-input px-4 py-3 mb-4 rounded-full text-black"></input>
         </label>
         <br />
-        <label className="text-anti-flash-white font-bold">
+        <label className="text-black font-bold">
           password:{' '}
           <input
             required
             type="password"
             name="password"
-            className="form-input px-4 py-3 mb-4 rounded-full text-space-cadet"
+            className="form-input px-4 py-3 mb-4 rounded-full text-black"
           />
         </label>
         <br />
         <div className="flex justify-center">
           <button
             disabled={isLoading}
-            className="btn bg-fire-engine-red mt-4 text-anti-flash-white font-bold">
+            className="btn bg-lilac mt-4 text-black font-bold">
             Sign In
           </button>
           <br />
         </div>
-        <p className="text-cool-gray p-5">
+        <p className="text-black p-5">
           If you do not already have an account, click{' '}
-          <Link to="/signup" className="link text-fire-engine-red">
+          <Link to="/signup" className="link text-black">
             Sign Up
           </Link>
         </p>

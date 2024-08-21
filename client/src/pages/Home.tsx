@@ -3,7 +3,7 @@ import { ReviewSnippet } from '../components/ReviewSnippet';
 
 export function Home() {
   return (
-    <div className="bg-space-cadet pb-10">
+    <div className="bg-dark-lilac pb-10">
       <Carousel />
       <ReviewSnippet />
     </div>
