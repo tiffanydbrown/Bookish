@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 
 export function NavBar() {
   return (
-    <nav className="bg-cherry-red">
+    <nav className="bg-lilac">
       <div>
-        <ul className="flex flex-wrap p-2 text-anti-flash-white text-[24px] navLinks gap-5">
+        <ul className="flex flex-wrap p-2 text-black text-[24px] navLinks gap-5">
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -12,10 +12,8 @@ export function NavBar() {
             <Link to="/about">About</Link>
           </li>
           <details className="dropdown">
-            <summary className=" bg-cherry-red text-anti-flash-white text-[24px]">
-              Books
-            </summary>
-            <ul className="p-2 shadow menu dropdown-content z-[1] text-cherry-red bg-base-100 rounded-box w-52">
+            <summary className="text-black text-[24px]">Books</summary>
+            <ul className="p-2 shadow menu dropdown-content z-[1] bg-lilac text-black rounded-box w-52">
               <li>
                 <Link to="/newReviews">Create a Review</Link>
               </li>
