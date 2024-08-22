@@ -33,7 +33,7 @@ export function NewReviewPage() {
     if (!bookEdit.id) return;
     setIsLoading(true);
     loadReview();
-  }, []);
+  }, [bookEdit.id]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error)
