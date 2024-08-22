@@ -27,7 +27,7 @@ export function Post() {
     }
     setIsLoading(true);
     loadReview();
-  }, []);
+  }, [bookPost.id]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error || !post)
@@ -53,14 +53,14 @@ export function Post() {
   }
 
   return (
-    <div className="bg-space-cadet">
+    <div className="bg-dark-lilac">
       <PostInfo review={post} />
       <PostReview bookReview={post} />
       <br />
       <ReviewRating review={post} />
       <br />
       {bookPost.id && (
-        <div className="delete flex flex-wrap justify-center pb-6 text-2xl underline text-fire-engine-red">
+        <div className="delete flex flex-wrap justify-center pb-6 text-2xl underline text-black">
           {/* Open the modal using document.getElementById('ID').showModal() method */}
           <button
             disabled={isLoading}
@@ -74,12 +74,12 @@ export function Post() {
               <div className="modal-action flex flex-wrap">
                 <form method="dialog">
                   {/* if there is a button in form, it will close the modal */}
-                  <button className="btn mr-4 bg-cool-gray text-anti-flash-white">
+                  <button className="btn mr-4 bg-dark-lilac text-black">
                     Cancel
                   </button>
                   <button
                     type="button"
-                    className="btn bg-fire-engine-red text-anti-flash-white"
+                    className="btn bg-dark-lilac text-black"
                     onClick={handleDelete}>
                     Delete
                   </button>
@@ -91,7 +91,7 @@ export function Post() {
       )}
       <Link
         to={`/reviews/${bookPost.id}`}
-        className="edit flex flex-wrap justify-center pb-6 text-2xl underline text-fire-engine-red">
+        className="edit flex flex-wrap justify-center pb-6 text-2xl underline text-black">
         Edit Review
       </Link>
     </div>
