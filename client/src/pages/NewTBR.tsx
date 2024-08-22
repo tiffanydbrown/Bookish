@@ -57,13 +57,11 @@ export function NewTBRPage() {
     }
   }
   return (
-    <div className="bg-space-cadet pb-10 pt-10">
+    <div className="bg-dark-lilac pb-10 pt-10">
       <form onSubmit={handleSubmit}>
         <TBRComponent tbr={post} />
         <div className="save p-10">
-          <button className="btn bg-fire-engine-red text-anti-flash-white">
-            Save
-          </button>
+          <button className="btn bg-lilac text-black">Save</button>
         </div>
       </form>
     </div>

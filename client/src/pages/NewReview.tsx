@@ -65,16 +65,14 @@ export function NewReviewPage() {
   }
 
   return (
-    <div className="bg-space-cadet">
+    <div className="bg-dark-lilac">
       <form onSubmit={handleSubmit}>
         <input type="hidden" name="bookReviewId" value={bookEdit.id} />
         <BookInfo review={post} />
         <BkReview review={post} />
         <RatingComponent review={post} />
         <div className="save p-10">
-          <button className="btn bg-fire-engine-red text-anti-flash-white">
-            Save
-          </button>
+          <button className="btn bg-lilac text-black">Save</button>
         </div>
       </form>
     </div>

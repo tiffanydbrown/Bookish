@@ -18,38 +18,38 @@ export function TBRComponent({ tbr }: Props) {
             className="rounded-xl"
           />
         </figure>
-        <label className="text-cherry-red p-2">
+        <label className="text-black p-2">
           Photo URL:{' '}
           <input
             type="text"
             value={photoUrl}
             name="TBRImage"
             onChange={(e) => setPhotoUrl(e.target.value)}
-            className="input input-ghost w-full max-w-xs border-cherry-red"
+            className="input input-ghost w-full max-w-xs border-dark-lilac"
           />
         </label>
         <div className="card-body items-center text-center">
-          <label className="text-cherry-red text-2xl">
+          <label className="text-black text-2xl">
             Title:{' '}
             <input
               type="text"
               placeholder="Type here"
               name="bookTitleTBR"
               defaultValue={tbr?.bookTitleTBR}
-              className="input input-ghost w-full max-w-xs border-cherry-red"
+              className="input input-ghost w-full max-w-xs border-dark-lilac"
             />
           </label>
-          <label className="text-cherry-red">
+          <label className="text-black">
             Author:{' '}
             <input
               type="text"
               placeholder="Type here"
               name="bookAuthorTBR"
               defaultValue={tbr?.bookAuthorTBR}
-              className="input input-ghost w-full max-w-xs border-cherry-red"
+              className="input input-ghost w-full max-w-xs border-dark-lilac"
             />
           </label>
-          <label className="text-cherry-red">
+          <label className="text-black">
             Release Date:{' '}
             <input
               type="text"
@@ -58,7 +58,7 @@ export function TBRComponent({ tbr }: Props) {
               defaultValue={
                 tbr?.releaseDate ? tbr.releaseDate.toString() : undefined
               }
-              className="input input-ghost w-full max-w-xs border-cherry-red"
+              className="input input-ghost w-full max-w-xs border-dark-lilac"
             />
           </label>
         </div>

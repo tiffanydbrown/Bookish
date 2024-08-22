@@ -22,7 +22,7 @@ export function UserReviewSnippet() {
     }
     setIsLoading(true);
     loadReview();
-  }, []);
+  }, [reviewAuthor]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error)
@@ -38,7 +38,7 @@ export function UserReviewSnippet() {
         {reviews?.map((review, index) => (
           <div key={index} className="hero-content flex-col lg:flex-row">
             <ReviewCard review={review} />
-            <button className="btn bg-fire-engine-red text-anti-flash-white">
+            <button className="btn bg-lilac text-black">
               <Link to={`/post/${review.bookReviewId}`}>Read More</Link>
             </button>
           </div>
