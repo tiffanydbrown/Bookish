@@ -25,7 +25,7 @@ export function NewTBRPage() {
     if (!TBREdit.id) return;
     setIsLoading(true);
     loadTBR;
-  }, []);
+  }, [TBREdit.id]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error)
