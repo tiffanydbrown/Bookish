@@ -32,19 +32,17 @@ export function PostInfo({ review }: BookProps) {
           <h1 className="text-5xl text-black font-bold">Review: {bookTitle}</h1>
           <p className="date text-black">{getDate()}</p>
           <br />
-          <label className="text-anti-flash-white">Title: {bookTitle}</label>
+          <label className="text-black">Title: {bookTitle}</label>
           <br />
-          <label className="text-anti-flash-white">Author: {bookAuthor}</label>
+          <label className="text-black">Author: {bookAuthor}</label>
           <br />
-          <label className="text-anti-flash-white">Series: {series}</label>
+          <label className="text-black">Series: {series}</label>
           <br />
-          <label className="text-anti-flash-white">
-            Publisher: {publisher}
-          </label>
+          <label className="text-black">Publisher: {publisher}</label>
           <br />
-          <label className="text-anti-flash-white">Genre: {genres}</label>
+          <label className="text-black">Genre: {genres}</label>
           <br />
-          <span className="text-anti-flash-white">Add to Goodreads:</span>
+          <span className="text-black">Add to Goodreads:</span>
           <a
             href="https://www.goodreads.com/"
             title="to-read shelf"
@@ -56,7 +54,7 @@ export function PostInfo({ review }: BookProps) {
             />
           </a>
           <br />
-          <p className="synopsis bg-cherry-red text-anti-flash-white rounded-3xl textarea-lg w-full max-w-lg">
+          <p className="synopsis bg-lilac text-black rounded-3xl textarea-lg w-full max-w-lg">
             {synopsis}
           </p>
         </div>
