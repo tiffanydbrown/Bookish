@@ -29,10 +29,8 @@ export function PostInfo({ review }: BookProps) {
           alt={bookTitle}
         />
         <div>
-          <h1 className="text-5xl text-fire-engine-red font-bold">
-            Review: {bookTitle}
-          </h1>
-          <p className="date text-cool-gray">{getDate()}</p>
+          <h1 className="text-5xl text-black font-bold">Review: {bookTitle}</h1>
+          <p className="date text-black">{getDate()}</p>
           <br />
           <label className="text-anti-flash-white">Title: {bookTitle}</label>
           <br />
