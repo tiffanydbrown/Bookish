@@ -1,4 +1,4 @@
-# :open_book: [Bookish](http://eb-bookish-dev.us-west-2.elasticbeanstalk.com/) :construction: Site Under Construction :construction:
+# :open_book: [Bookish](http://eb-bookish-dev.us-west-2.elasticbeanstalk.com/)
 
 A web application for book lovers who want to write and read reviews of their favorite books and keep track of the books they would like to read.
 
