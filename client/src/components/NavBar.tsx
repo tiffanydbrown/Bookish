@@ -1,6 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
 
 export function NavBar() {
+  const navigate = useNavigate();
+  const detailsRef = useRef<HTMLDetailsElement>(null);
+
+  // Function to handle closing the dropdown after a selection
+  const handleLinkClick = (path: string) => {
+    if (detailsRef.current) {
+      detailsRef.current.open = false;
+    }
+    navigate(path);
+  };
   return (
     <nav className="bg-lilac">
       <div>
@@ -11,20 +22,26 @@ export function NavBar() {
           <li>
             <Link to="/about">About</Link>
           </li>
-          <details className="dropdown">
+          <details ref={detailsRef} className="dropdown">
             <summary className="text-black text-[24px]">Books</summary>
             <ul className="p-2 shadow menu dropdown-content z-[1] bg-lilac text-black rounded-box w-52">
               <li>
-                <Link to="/newReviews">Create a Review</Link>
+                <button onClick={() => handleLinkClick('/newReviews')}>
+                  Create a Review
+                </button>
               </li>
               <li>
-                <Link to="/reviews">Reviews</Link>
+                <button onClick={() => handleLinkClick('/reviews')}>
+                  Reviews
+                </button>
               </li>
               <li>
-                <Link to="/newTbr">Add to TBR</Link>
+                <button onClick={() => handleLinkClick('/newTbr')}>
+                  Add to TBR
+                </button>
               </li>
               <li>
-                <Link to="/tbr">TBR</Link>
+                <button onClick={() => handleLinkClick('/tbr')}>TBR</button>
               </li>
             </ul>
           </details>

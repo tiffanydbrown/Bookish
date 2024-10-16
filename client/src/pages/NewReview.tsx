@@ -17,8 +17,16 @@ export function NewReviewPage() {
   const [post, setPost] = useState<Review>();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<unknown>();
+  const [authError, setAuthError] = useState<string | null>(null);
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      // If no token, set an error and do not proceed
+      setAuthError('You must be signed in to write or edit a review.');
+      return;
+    }
+
     async function loadReview() {
       try {
         if (!bookEdit.id) throw new Error('No id');
@@ -34,6 +42,12 @@ export function NewReviewPage() {
     setIsLoading(true);
     loadReview();
   }, [bookEdit.id]);
+
+  if (authError) {
+    return (
+      <div className="text-red-500 font-bold text-center p-10">{authError}</div>
+    );
+  }
 
   if (isLoading) return <div>Loading...</div>;
   if (error)

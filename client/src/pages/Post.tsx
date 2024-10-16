@@ -9,11 +9,15 @@ export function Post() {
   const [post, setPost] = useState<Review>();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<unknown>();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const bookPost = useParams();
   const navigate = useNavigate();
   const modalRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+
     async function loadReview() {
       try {
         if (!bookPost.id) throw new Error('No id');
@@ -59,41 +63,49 @@ export function Post() {
       <br />
       <ReviewRating review={post} />
       <br />
-      {bookPost.id && (
-        <div className="delete flex flex-wrap justify-center pb-6 text-2xl underline text-black">
-          {/* Open the modal using document.getElementById('ID').showModal() method */}
-          <button
-            disabled={isLoading}
-            className="btn btn-ghost text-2xl"
-            onClick={() => modalRef.current?.showModal()}>
-            Delete Review
-          </button>
-          <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
-            <div className="modal-box bg-anti-flash-white">
-              <p className="py-4">Are You Sure You Want to Delete?</p>
-              <div className="modal-action flex flex-wrap">
-                <form method="dialog">
-                  {/* if there is a button in form, it will close the modal */}
-                  <button className="btn mr-4 bg-dark-lilac text-black">
-                    Cancel
-                  </button>
-                  <button
-                    type="button"
-                    className="btn bg-dark-lilac text-black"
-                    onClick={handleDelete}>
-                    Delete
-                  </button>
-                </form>
-              </div>
+
+      {isLoggedIn && (
+        <>
+          {bookPost.id && (
+            <div className="delete flex flex-wrap justify-center pb-6 text-2xl underline text-black">
+              {/* Open the modal using document.getElementById('ID').showModal() method */}
+              <button
+                disabled={isLoading}
+                className="btn btn-ghost text-2xl"
+                onClick={() => modalRef.current?.showModal()}>
+                Delete Review
+              </button>
+              <dialog
+                ref={modalRef}
+                className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box bg-anti-flash-white">
+                  <p className="py-4">Are You Sure You Want to Delete?</p>
+                  <div className="modal-action flex flex-wrap">
+                    <form method="dialog">
+                      {/* if there is a button in form, it will close the modal */}
+                      <button className="btn mr-4 bg-dark-lilac text-black">
+                        Cancel
+                      </button>
+                      <button
+                        type="button"
+                        className="btn bg-dark-lilac text-black"
+                        onClick={handleDelete}>
+                        Delete
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </dialog>
             </div>
-          </dialog>
-        </div>
+          )}
+
+          <Link
+            to={`/reviews/${bookPost.id}`}
+            className="edit flex flex-wrap justify-center pb-6 text-2xl underline text-black">
+            Edit Review
+          </Link>
+        </>
       )}
-      <Link
-        to={`/reviews/${bookPost.id}`}
-        className="edit flex flex-wrap justify-center pb-6 text-2xl underline text-black">
-        Edit Review
-      </Link>
     </div>
   );
 }

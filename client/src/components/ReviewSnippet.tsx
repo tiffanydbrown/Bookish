@@ -38,7 +38,7 @@ export function ReviewSnippet() {
             key={review.bookReviewId}
             className="hero-content flex-col lg:flex-row">
             <ReviewCard review={review} />
-            <button className="btn bg-lilac text-black">
+            <button className="btn bg-lilac text-black hover:bg-anti-flash-white hover:text-black">
               <Link to={`/post/${review.bookReviewId}`}>Read More</Link>
             </button>
           </div>
