@@ -9,6 +9,16 @@ export function NewTBRPage() {
   const [error, setError] = useState<unknown>();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
 
   useEffect(() => {
     async function loadTBR() {
@@ -38,6 +48,11 @@ export function NewTBRPage() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (!isLoggedIn) {
+      alert('You need to sign in to add a book to your TBR list.');
+      return;
+    }
 
     const form = e.currentTarget;
     const formData = new FormData(form);
