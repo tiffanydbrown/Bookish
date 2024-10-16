@@ -10,7 +10,7 @@ A web application for book lovers who want to write and read reviews of their fa
 - Users can `view` the reviews of other users.
 - Users can `create an account` to use the application, and can `securely sign in` to the site.
 
-![ScreenRecording2024-02-07at12 10 02PM-ezgif com-video-to-gif-converter](https://github.com/tiffanydbrown/Bookish/assets/139157669/06225981-3420-4b2c-bc2a-cf784177d676)
+![ScreenRecording2024-10-16at11 17 18AM-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/bbce90a7-0715-4178-ad62-a910adf9c484)
 
 ## :floppy_disk: Install
 
